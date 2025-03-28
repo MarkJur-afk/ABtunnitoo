@@ -58,51 +58,54 @@ values (7, 'Spiderman', 'spider@spiderman.com', 2)
 select * from Person
 
 --- ?
+--- tabeli uuendamine ja eemaldab piirangu
 alter table Person
-drop constraint tblPerson_GenderId_FK
+drop constraint tblPerson_GenderId_FK;
 
--- ?
+-- Sisestab andmed tabelisse.
 insert into Gender (Id, Gender)
-values (3, 'Unknown')
+values (3, 'Unknown');
+
 -- lisame võõrvõtme uuesti
 alter table Person
 add constraint DF_Person_GenderId
-default 3 for GenderId
+default 3 for GenderId;
 
-
-select * from Person
-select * from Gender
+select * from Person;
+select * from Gender;
 
 insert into Person (Id, Name, Email)
-values (8, 'Test', 'Test')
+values (8, 'Test', 'Test');
 
----?
+--- Lisame uue veeru "Age" tabelisse Person
 alter table Person
-add Age nvarchar(10)
+add Age nvarchar(10);
 
---uuendame andmeid
+-- Uuendame andmeid, kus Id on 8
 update Person
 set Age = 149
-where Id = 8
+where Id = 8;
 
---?
+-- Lisame piirangu veerule Age, et väärtus oleks suurem kui 0 ja väiksem kui 150
 alter table Person
-add constraint CK_Person_Age check (Age > 0 and Age < 150)
+add constraint CK_Person_Age check (Age > 0 and Age < 150);
 
+-- Lisame uue kirje tabelisse Person, kus vanus on 149
 insert into Person (Id, Name, Email, GenderId, Age)
-values (9, 'Test', 'Test', 2, 160)
+values (9, 'Test', 'Test', 2, 149);
 
---?
-select * from Person
+-- Valime kõik andmed tabelist Person
+select * from Person;
 go
-delete from Person where Id = 8
+-- Kustutame kirje, kus Id on 8
+delete from Person where Id = 8;
 go
-select * from Person
+-- Valime kõik andmed tabelist Person pärast kustutamist
+select * from Person;
 
---- lisame veeru juurde
+--- Lisame uue veeru "City" tabelisse Person
 alter table Person
-add City nvarchar(25)
-
+add City nvarchar(25);
 -- ?
 select * from Person where City = 'Gotham'
 
