@@ -160,109 +160,110 @@ select max(cast(Age as int)) from Person;
 select City, sum(cast(Age as int)) as TotalAge from Person group by City;
 
 
---- loome uued tabelid
+--- Loome uued tabelid
 create table Department
 (
-Id int primary key,
-DepartmentName nvarchar(50),
-Location nvarchar(50),
-DepartmentHead nvarchar(50)
-)
+    Id int primary key,
+    DepartmentName nvarchar(50),
+    Location nvarchar(50),
+    DepartmentHead nvarchar(50)
+);
 
 create table Employees
 (
-Id int primary key,
-Name nvarchar(50),
-Gender nvarchar(10),
-Salary nvarchar(50),
-DepartmentId int
-)
+    Id int primary key,
+    Name nvarchar(50),
+    Gender nvarchar(10),
+    Salary nvarchar(50),
+    DepartmentId int
+);
 
---?
+--- Lisame andmed tabelisse Department
 insert into Department (Id, DepartmentName, Location, DepartmentHead)
-values (1, 'IT', 'London', 'Rick')
+values (1, 'IT', 'London', 'Rick');
 insert into Department (Id, DepartmentName, Location, DepartmentHead)
-values (2, 'Payroll', 'Delhi', 'Ron')
+values (2, 'Payroll', 'Delhi', 'Ron');
 insert into Department (Id, DepartmentName, Location, DepartmentHead)
-values (3, 'HR', 'New York', 'Christie')
+values (3, 'HR', 'New York', 'Christie');
 insert into Department (Id, DepartmentName, Location, DepartmentHead)
-values (4, 'Other Deparment', 'Sydney', 'Cindrella')
+values (4, 'Other Department', 'Sydney', 'Cindrella');
 
-select * from Department
+select * from Department;
 
+--- Lisame andmed tabelisse Employees
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (1, 'Tom', 'Male', 4000, 1)
+values (1, 'Tom', 'Male', 4000, 1);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (2, 'Pam', 'Female', 3000, 1)
+values (2, 'Pam', 'Female', 3000, 1);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (3, 'John', 'Male', 3500, 1)
+values (3, 'John', 'Male', 3500, 1);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (4, 'Sam', 'Male', 4500, 2)
+values (4, 'Sam', 'Male', 4500, 2);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (5, 'Todd', 'Male', 2800, 1)
+values (5, 'Todd', 'Male', 2800, 1);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (6, 'Ben', 'Male', 7000, 1)
+values (6, 'Ben', 'Male', 7000, 1);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (7, 'Sara', 'Female', 4800, 3)
+values (7, 'Sara', 'Female', 4800, 3);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (8, 'Valarie', 'Female', 5500, 1)
+values (8, 'Valarie', 'Female', 5500, 1);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (9, 'James', 'Male', 6500, NULL)
+values (9, 'James', 'Male', 6500, NULL);
 insert into Employees (Id, Name, Gender, Salary, DepartmentId)
-values (10, 'Russell', 'Male', 8800, NULL)
+values (10, 'Russell', 'Male', 8800, NULL);
 
-select * from Employees
+select * from Employees;
 
----?
-select distinct Name, DepartmentId from Employees
+--- Valime unikaalsed nimed ja DepartmentId tabelist Employees
+select distinct Name, DepartmentId from Employees;
 
----?
-select sum(cast(Salary as int)) from Employees
----?
-select min(cast(Salary as int)) from Employees
+--- Arvutame palkade summa tabelis Employees
+select sum(cast(Salary as int)) from Employees;
 
+--- Arvutame palga miinimumväärtuse tabelis Employees
+select min(cast(Salary as int)) from Employees;
 
+--- Lisame uue veeru "City" tabelisse Employees
 alter table Employees
-add City nvarchar(25)
+add City nvarchar(25);
 
-
+--- Lisame uue veeru "DepartmentId" tabelisse Employees (lubatud väärtus NULL)
 alter table Employees
-add DepartmentId
-int null
+add DepartmentId int null;
 
-
---?
+--- Lisame uue veeru "MiddleName" tabelisse Employees
 alter table Employees
-add MiddleName nvarchar(30)
+add MiddleName nvarchar(30);
 
+--- Lisame uue veeru "LastName" tabelisse Employees
 alter table Employees
-add LastName nvarchar(30)
+add LastName nvarchar(30);
 
+--- Uuendame andmed Employees tabelis, täiendame eesnimesid ja perekonnanimesid
 update Employees set FirstName = 'Tom', MiddleName = 'Nick', LastName = 'Jones'
-where Id = 1
+where Id = 1;
 update Employees set FirstName = 'Pam', MiddleName = NULL, LastName = 'Anderson'
-where Id = 2
+where Id = 2;
 update Employees set FirstName = 'John', MiddleName = NULL, LastName = NULL
-where Id = 3
+where Id = 3;
 update Employees set FirstName = 'Sam', MiddleName = NULL, LastName = 'Smith'
-where Id = 4
+where Id = 4;
 update Employees set FirstName = NULL, MiddleName = 'Todd', LastName = 'Someone'
-where Id = 5
+where Id = 5;
 update Employees set FirstName = 'Ben', MiddleName = 'Ten', LastName = 'Sven'
-where Id = 6
+where Id = 6;
 update Employees set FirstName = 'Sara', MiddleName = NULL, LastName = 'Connor'
-where Id = 7
+where Id = 7;
 update Employees set FirstName = 'Valarie', MiddleName = 'Balerine', LastName = NULL
-where Id = 8
+where Id = 8;
 update Employees set FirstName = 'James', MiddleName = '007', LastName = 'Bond'
-where Id = 9
+where Id = 9;
 update Employees set FirstName = NULL, MiddleName = NULL, LastName = 'Crowe'
-where Id = 10
+where Id = 10;
 
-
---- igast reast võtab esimeses veerus täidetud lahtri ja kuvab ainult seda
+--- Kuvame esimese täidetud lahtri igast reast, kasutades COALESCE funktsiooni
 select Id, coalesce(FirstName, MiddleName, LastName) as Name
-from Employees
+from Employees;
 
-select * from Employees
-select * from Department
+select * from Employees;
+select * from Department;
