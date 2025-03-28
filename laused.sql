@@ -101,60 +101,63 @@ select * from Person
 alter table Person
 add City nvarchar(25)
 
--- ?
-select * from Person where City = 'Gotham'
+-- Valime kõik kirjed, kus linn on 'Gotham'
+select * from Person where City = 'Gotham';
 
+-- Valime kõik kirjed, kus linn ei ole 'Gotham'
+select * from Person where City <> 'Gotham';
+select * from Person where City != 'Gotham';
 
--- kõik, kes ei ela Gothamis
-select * from Person where City <> 'Gotham'
-select * from Person where City != 'Gotham'
-
--- ?
+-- Valime kirjed, kus vanus on 100, 50 või 20
 select *from Person where Age = 100 or 
-Age = 50 or Age = 20
-select * from Person where Age in (100, 50, 20)
+Age = 50 or Age = 20;
+select * from Person where Age in (100, 50, 20);
 
+--- Valime kirjed, kus linn algab tähega 'n'
+select * from Person where City like 'n%';
 
---- ?
-select * from Person where City like 'n%'
-select * from Person where Email like '%@%'
+-- Valime kirjed, kus Email sisaldab '@' tähte
+select * from Person where Email like '%@%';
 
--- ?
-select * from Person where Email not like '%@%'
+-- Valime kirjed, kus Email ei sisalda '@' tähte
+select * from Person where Email not like '%@%';
 
---- näitab, kelle on emailis ees ja peale @-märki
--- ainult üks täht
-select * from Person where Email like '_@_.com'
+--- Valime kirjed, kus Email koosneb ühest tähemärgist enne ja pärast '@'
+select * from Person where Email like '_@_.com';
 
---?
-select * from Person where Name like '[^WAS]%'
---- ?
+-- Valime kirjed, kus nimi ei alga 'W', 'A' või 'S' tähega
+select * from Person where Name like '[^WAS]%';
+
+--- Valime kirjed, kus linn on 'Gotham' või 'New York' ja vanus on vähemalt 40
 select * from Person where (City = 'Gotham' or City = 'New York')
-and Age >= 40
+and Age >= 40;
 
----võtab kolm esimest rida
-select top 3 * from Person
+--- Valime kolm esimest kirjet tabelist Person
+select top 3 * from Person;
 
---- ?
-select * from Person
-select top 3 Age, Name from Person
+--- Valime kolm esimest kirjet, aga ainult veerud Age ja Name
+select top 3 Age, Name from Person;
 
---- ?
-select top 50 percent * from Person
---?
-select * from Person order by cast(Age as int)
-select * from Person order by Age
+--- Valime 50% kirjetest tabelis Person
+select top 50 percent * from Person;
 
---?
-select sum(cast(Age as int)) from Person
+-- Sorteerime kirjed veeru Age järgi (muudetud täisarvuks)
+select * from Person order by cast(Age as int);
 
---?
-select min(cast(Age as int)) from Person
+-- Sorteerime kirjed veeru Age järgi
+select * from Person order by Age;
 
---?
-select max(cast(Age as int)) from Person
+-- Arvutame vanuste summa
+select sum(cast(Age as int)) from Person;
 
-select City, sum(cast(Age as int)) as TotalAge from Person group by City
+-- Arvutame vanuse miinimumväärtuse
+select min(cast(Age as int)) from Person;
+
+-- Arvutame vanuse maksimumväärtuse
+select max(cast(Age as int)) from Person;
+
+-- Summeerime vanused linnade kaupa
+select City, sum(cast(Age as int)) as TotalAge from Person group by City;
 
 
 --- loome uued tabelid
