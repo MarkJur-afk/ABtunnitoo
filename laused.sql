@@ -8,10 +8,11 @@
 -- db loomine
 create database Tarpv24
 
---?
+--delete data base 
 DRop DataBASE Tarpv24
 
---?
+--tabeli Gender loomine 
+use Tarpv24;
 create table Gender
 (
 Id int NOT NULL primary key,
