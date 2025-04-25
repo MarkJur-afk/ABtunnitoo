@@ -15,3 +15,21 @@ Female - spGetEmployeeCountByGender
 Male - spGetEmployeeCountByGender
 
 ![pilt](https://github.com/user-attachments/assets/c5567ca8-2fec-4819-bfdc-7df6bfbe8f22)
+
+
+-- sp sisu vaatamine
+sp_help spGetEmployeeCountByGender
+
+-- tabeli info
+sp_help Employees
+
+-- kui soovid sp tektsi näha
+sp_helptext spGetEmployeeCountByGender
+
+-- vaatame , millest see sp sõltub
+sp_depends spGetEmployeeCountByGender
+
+-- vaatame tabelit
+sp_depends Employees
+
+
