@@ -48,17 +48,18 @@ select Id, Name, Email from UKCustomers
 order by Name
 
 --- stored procedure
-create procedure spGetEmployees
+create procedure spGetCustomers
 as begin
-	select FirstName, Gender from Employees
+	select Name, Email from UKCustomers
 end
-
+drop procedure spGetCustomers;
 -- nüüd saab kasutada selle nimelist sp-d
-spGetEmployees
-exec spGetEmployees
-execute spGetEmployees
+spGetCustomers
+exec spGetCustomers
+execute spGetCustomers
 
-select * from Employees
+select * from UKCustomers
+
 
 create proc spGetEmployeesByGenderAndDepartment
 @Gender nvarchar(20),
