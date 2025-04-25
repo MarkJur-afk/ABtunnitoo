@@ -1,3 +1,8 @@
+create database MarkIndex;
+
+use MarkIndex;
+
+
 --loome kaks tabelit
 create table IndianCustomers
 (
