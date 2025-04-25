@@ -31,6 +31,7 @@ select * from IndianCustomers
 select * from UKCustomers
 
 -- kasutame union all, näitab kõiki ridu
+--mäitab kõik ridu kui veerunimed on samad
 select Id, Name, Email from IndianCustomers
 union all
 select Id, Name, Email from UKCustomers
